@@ -6,7 +6,6 @@
     "compile": "./node_modules/.bin/tsc",
     "run-client": "node ./bin/ExampleTcpClient.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "postinstall": "npm run compile",
     "test": "jest"
   },
   "browser": {
