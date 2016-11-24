@@ -10,7 +10,6 @@ export default class ExampleTcpServer {
     constructor() {
         let bus:IEventBus = EventBus.getInstance();
         let port:number = 5000;
-        let host:string = "localhost";
         let server:net.Server = net.createServer((socket) => {
 			console.log("New client");
 
@@ -23,10 +22,8 @@ export default class ExampleTcpServer {
 				console.log("close client ");
                  bus.sendMessage({messageType:MessageType.CONNECTION_CLOSED});
 			});
-		}).listen(port, "localhost", null, function() {
-			console.log("Tcp server started "+host+":"+port);
-		});
-
+		}).listen(port);
+		
 		server.on("error", function(e) {
 			
 		});

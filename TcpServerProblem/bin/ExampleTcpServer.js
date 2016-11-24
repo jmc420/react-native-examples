@@ -6,7 +6,6 @@ class ExampleTcpServer {
     constructor() {
         let bus = EventBus_1.default.getInstance();
         let port = 5000;
-        let host = "localhost";
         let server = net.createServer((socket) => {
             console.log("New client");
             bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_OPENED });
@@ -16,9 +15,7 @@ class ExampleTcpServer {
                 console.log("close client ");
                 bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_CLOSED });
             });
-        }).listen(port, "localhost", null, function () {
-            console.log("Tcp server started " + host + ":" + port);
-        });
+        }).listen(port);
         server.on("error", function (e) {
         });
         server.on("close", function (e) {
