@@ -37,6 +37,11 @@ constructor() {
       this.updateState();
     }, this);
 
+    bus.addEventListener(MessageType.SERVER_ERROR, function() {
+      this.serverState = "error";
+      this.updateState();
+    }, this);
+
      bus.addEventListener(MessageType.SERVER_LISTENING, function() {
       this.serverState = "listening";
       this.updateState();

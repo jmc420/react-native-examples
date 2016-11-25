@@ -20,12 +20,12 @@ export default class ExampleTcpServer {
 			});
 			socket.on("close", () => {
 				console.log("close client ");
-                 bus.sendMessage({messageType:MessageType.CONNECTION_CLOSED});
+                bus.sendMessage({messageType:MessageType.CONNECTION_CLOSED});
 			});
 		}).listen(port);
 		
 		server.on("error", function(e) {
-			
+			bus.sendMessage({messageType:MessageType.SERVER_ERROR});
 		});
 
 		server.on("close", function(e) {
@@ -35,7 +35,6 @@ export default class ExampleTcpServer {
 		server.on("listening", () => {
 			bus.sendMessage({messageType:MessageType.SERVER_LISTENING});
 		});
-;
 
     }
 }

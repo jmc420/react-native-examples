@@ -39,8 +39,10 @@ class ExampleTcpClient {
     connect(host, done) {
         let socket = new net.Socket();
         socket.on("close", (e) => {
+            console.log("Socket closed");
         });
         socket.on("error", (e) => {
+            console.log("Socket cannot connect");
         });
         socket.connect(5000, host, () => {
             console.log("Add connection");

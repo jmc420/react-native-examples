@@ -25,6 +25,10 @@ class Root extends React.Component {
             this.serverState = "closed";
             this.updateState();
         }, this);
+        bus.addEventListener(MessageType_1.default.SERVER_ERROR, function () {
+            this.serverState = "error";
+            this.updateState();
+        }, this);
         bus.addEventListener(MessageType_1.default.SERVER_LISTENING, function () {
             this.serverState = "listening";
             this.updateState();

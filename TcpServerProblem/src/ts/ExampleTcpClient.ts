@@ -54,11 +54,11 @@ export default class ExampleTcpClient {
         let socket:net.Socket = new net.Socket();
 		
 		socket.on("close", (e) => {
-			
+			console.log("Socket closed");
 		});
 
 		socket.on("error", (e) => {
-			
+			console.log("Socket cannot connect");
 		});
 
 		socket.connect(5000, host, () => {

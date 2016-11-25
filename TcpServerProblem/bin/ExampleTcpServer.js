@@ -17,6 +17,7 @@ class ExampleTcpServer {
             });
         }).listen(port);
         server.on("error", function (e) {
+            bus.sendMessage({ messageType: MessageType_1.default.SERVER_ERROR });
         });
         server.on("close", function (e) {
             bus.sendMessage({ messageType: MessageType_1.default.SERVER_CLOSED });
@@ -24,7 +25,6 @@ class ExampleTcpServer {
         server.on("listening", () => {
             bus.sendMessage({ messageType: MessageType_1.default.SERVER_LISTENING });
         });
-        ;
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
