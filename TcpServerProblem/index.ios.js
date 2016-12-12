@@ -2,6 +2,7 @@
  * TcpServerProblem
  */
 
+import './shim.js'
 import React, { Component } from 'react';
 import Application from './bin/Application';
 

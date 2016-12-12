@@ -4,19 +4,29 @@
   "private": true,
   "scripts": {
     "compile": "./node_modules/.bin/tsc",
+    "postinstall": "rn-nodeify --install stream,process,util --hack",
     "start-client": "node ./bin/ExampleTcpClient.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "browser": {
     "dgram": "react-native-udp",
-    "net": "react-native-tcp"
+    "net": "react-native-tcp",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify"
   },
   "dependencies": {
     "eventemitter3": "1.1.1",
-    "react": "15.3.2",
-    "react-native": "0.37.0",
-    "react-native-tcp": "^3.0.0"
+    "process": "^0.11.9",
+    "react": "15.4.1",
+    "react-native": "0.38.1",
+    "react-native-tcp": "^3.0.3",
+    "readable-stream": "^1.0.33",
+    "stream-browserify": "^1.0.0"
   },
   "jest": {
     "preset": "jest-react-native"
@@ -31,7 +41,18 @@
     "jest": "17.0.3",
     "jest-react-native": "17.0.3",
     "react-test-renderer": "15.3.2",
+    "rn-nodeify": "^7.0.1",
     "typescript": "^2.0.6",
     "whatwg-fetch": "2.0.1"
+  },
+  "react-native": {
+    "dgram": "react-native-udp",
+    "net": "react-native-tcp",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify"
   }
 }
