@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Application from './bin/Application';
+import Navigation from './bin/Navigation';
 
 import {
   AppRegistry
