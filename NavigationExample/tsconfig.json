@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "declaration": false,
+        "jsx": "react",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "outDir": "bin",
+        "sourceMap": false,
+        "target": "es6"
+    },
+    "exclude": [
+        "bin/*",
+        "node_modules",
+        "node_modules/@types/*",
+        "typings"
+    ],
+    "filesGlob": [
+        "src/ts/**/*.ts",
+        "src/ts/**/*.tsx",
+        "!./node_modules/**/*.ts",
+        "!./node_modules/**/*.d.ts",
+        "!./src/ts/typings/**/*.d.ts"
+    ]
+}
