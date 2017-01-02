@@ -1,5 +1,5 @@
 "use strict";
-const EventEmitter = require('eventemitter3');
+const EventEmitter = require("eventemitter3");
 class EventBus {
     constructor() {
         if (EventBus.instance != null) {

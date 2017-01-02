@@ -1,8 +1,8 @@
 "use strict";
 const React = require("react");
-const EventBus_1 = require('./events/EventBus');
-const Root_1 = require('./view/Root');
-const ExampleTcpServer_1 = require('./ExampleTcpServer');
+const EventBus_1 = require("./events/EventBus");
+const Root_1 = require("./view/Root");
+const ExampleTcpServer_1 = require("./ExampleTcpServer");
 class Application extends React.Component {
     constructor() {
         super();

@@ -1,7 +1,7 @@
 "use strict";
-const net = require('net');
-const EventBus_1 = require('./events/EventBus');
-const MessageType_1 = require('./messages/MessageType');
+const net = require("net");
+const EventBus_1 = require("./events/EventBus");
+const MessageType_1 = require("./messages/MessageType");
 class ExampleTcpServer {
     constructor() {
         let bus = EventBus_1.default.getInstance();

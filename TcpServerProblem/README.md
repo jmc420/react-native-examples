@@ -68,9 +68,22 @@ Socket closed
 Socket cannot connect  
 Socket closed  
 
-4.The problem in iOS
+4.The problems in iOS
+
+a) Listening fails
 
 The problem seems to be that when a client connection ends, the Tcp server stops listening.
+
+This was fixed by react-native-tcp 3.0.5
+
+b) socket close event not raised in iOS
+
+The event listen on line 14 of ExampleTcpServer.js is not triggered in iOS but works in android:
+
+socket.on("close", () => {
+    console.log("close client ");
+    bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_CLOSED });
+});
 
 
 

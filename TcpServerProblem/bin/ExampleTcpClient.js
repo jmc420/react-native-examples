@@ -1,5 +1,5 @@
 "use strict";
-const net = require('net');
+const net = require("net");
 class ExampleTcpClient {
     constructor() {
         this.clients = [];
@@ -17,7 +17,7 @@ class ExampleTcpClient {
                     this.clients[count].destroy();
                 }
                 this.makeConnections(host, maxClients, () => {
-                    process.exit();
+                    this.quit();
                 });
             }, 3000);
         });
@@ -49,6 +49,10 @@ class ExampleTcpClient {
             done();
         });
         return socket;
+    }
+    quit() {
+        console.log('Press any key to exit');
+        process.stdin.on('data', process.exit.bind(process, 0));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
