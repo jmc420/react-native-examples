@@ -78,12 +78,20 @@ This was fixed by react-native-tcp 3.0.5
 
 b) socket close event not raised in iOS
 
-The event listen on line 14 of ExampleTcpServer.js is not triggered in iOS but works in android:
+The socket.on("close") listen on line 14 of ExampleTcpServer.js is not triggered in iOS but works in android:
 
-socket.on("close", () => {
-    console.log("close client ");
-    bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_CLOSED });
-});
+let server = net.createServer((socket) => {
+            console.log("New client");
+            bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_OPENED });
+            socket.on("data", (data) => {
+            });
+            socket.on("close", () => {
+                console.log("close client ");
+                bus.sendMessage({ messageType: MessageType_1.default.CONNECTION_CLOSED });
+            });
+        }).listen(port);
+
+This was fixed by react-native-tcp 3.0.6
 
 
 
