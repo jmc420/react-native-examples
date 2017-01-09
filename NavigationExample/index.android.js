@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Navigation from './bin/Navigation';
+import Navigator from './bin/Navigator';
 
 import {
   AppRegistry
 } from 'react-native';
 
-AppRegistry.registerComponent('NavigationExample', () => Navigation);
+AppRegistry.registerComponent('NavigationExample', () => Navigator);
