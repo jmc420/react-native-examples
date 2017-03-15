@@ -7,6 +7,9 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@types/eventemitter3": "^1.1.29",
+		"@types/react": "^0.14.43",
+		"eventemitter3": "1.1.1",
 		"react": "15.4.1",
 		"react-native": "0.39.2",
 		"react-native-drawer": "^2.2.4",

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Text,View} from 'react-native';
 import * as Ionicons from 'react-native-vector-icons/Ionicons';
 
-import styles from './Styles';
+import styles from './styles/Styles';
 
 export default class Navigation extends React.Component<any,any> {
  

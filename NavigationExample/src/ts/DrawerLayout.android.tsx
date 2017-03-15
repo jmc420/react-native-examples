@@ -2,10 +2,12 @@ import * as React from 'react';
 import { DrawerLayoutAndroid, Text, View } from 'react-native';
 
 import Toolbar from './Toolbar.android';
-import styles from './Styles';
+import styles from './styles/Styles';
 
 interface DrawerLayoutProps {
-    navigator:Navigator;
+  data: any;
+  navigator: Navigator;
+  route: any;
 }
 
 export default class DrawerLayout extends React.Component<DrawerLayoutProps, any> {

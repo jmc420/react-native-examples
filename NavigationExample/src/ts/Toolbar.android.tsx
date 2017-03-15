@@ -2,10 +2,11 @@ import * as React from 'react';
 import { DrawerLayoutAndroid, Text, View } from 'react-native';
 import * as Ionicons from 'react-native-vector-icons/Ionicons';
 
-import styles from './Styles';
+import styles from './styles/Styles';
 
 interface ToolbarProps {
     sidebarRef:DrawerLayoutAndroid;
+    style:any;
 }
 
 export default class Toolbar extends React.Component<ToolbarProps, any> {
