@@ -7,40 +7,29 @@ import EventEmitter = require('eventemitter3');
 import styles from './styles/Styles';
 import Home from './views/Home';
 import Menu from './views/Menu';
+import IRoute from './IRoute';
+import RouteMap from './RouteMap';
 import View1 from './views/View1';
 import View2 from './views/View2';
 
 export default class Navigation extends React.Component<any, any> {
 
-    private componentMap: any;
     private drawer: Drawer;
     private eventEmitter: EventEmitter;
     private navigator: Navigator;
     private navigationBarRouteMapper;
+    private routeMap:{[id:string]:IRoute} = {};
     private useBackButton;
 
     constructor() {
         super();
 
+        let routeMap = new RouteMap();
+
+        this.routeMap = routeMap.getRouteMap();
         this.useBackButton = false;
         this.eventEmitter = new EventEmitter();
         this.navigationBarRouteMapper = this.createNavigationBarRouteMapper();
-
-        this.componentMap = {
-            'Home': {
-                title: 'Home',
-                id: 'Home'
-            },
-            'View1': {
-                title: 'View1',
-                id: 'View1'
-            },
-            'View2': {
-                title: 'View2',
-                id: 'View2'
-            }
-        }
-
     }
 
     componentDidMount() {
@@ -64,10 +53,10 @@ export default class Navigation extends React.Component<any, any> {
                 type="overlay"
                 content={<Menu navigate={(route) => {
                     if (self.useBackButton) {
-                        self.navigator.push(self.componentMap[route]);
+                        self.navigator.push(self.routeMap[route]);
                     }
                     else {
-                        self.navigator.replace(self.componentMap[route]);
+                        self.navigator.replace(self.routeMap[route]);
                     }
                     self.drawer.close()
                 }} />}
@@ -104,13 +93,13 @@ export default class Navigation extends React.Component<any, any> {
     private renderScene(route, navigator) {
         switch (route.id) {
             case 'Home':
-                return (<Home navigator={navigator} />);
+                return (<Home/>);
 
             case 'View1':
-                return (<View1 navigator={navigator} />);
+                return (<View1/>);
 
             case 'View2':
-                return (<View2 navigator={navigator} />);
+                return (<View2/>);
         }
     }
 

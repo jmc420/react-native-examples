@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         top: 20
     },
     menuItem: {
+        backgroundColor: '#FFF',
         color: '#3F51B5',
         padding: 10,
         textAlign: 'left'
@@ -47,7 +48,11 @@ const styles = StyleSheet.create({
     scene: {
         flex: 1,
         paddingTop: 63,
-    }
+    },
+    toolBar: {
+        backgroundColor: '#3F51B5',
+        height:56
+    },
 });
 
 export default styles;
