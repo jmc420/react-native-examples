@@ -17,10 +17,12 @@ export default class Navigation extends React.Component<any, any> {
     private eventEmitter: EventEmitter;
     private navigator: Navigator;
     private navigationBarRouteMapper;
+    private useBackButton;
 
     constructor() {
         super();
 
+        this.useBackButton = false;
         this.eventEmitter = new EventEmitter();
         this.navigationBarRouteMapper = this.createNavigationBarRouteMapper();
 
@@ -61,7 +63,12 @@ export default class Navigation extends React.Component<any, any> {
                 ref={(ref) => self.drawer = ref}
                 type="overlay"
                 content={<Menu navigate={(route) => {
-                    self.navigator.push(self.componentMap[route]);
+                    if (self.useBackButton) {
+                        self.navigator.push(self.componentMap[route]);
+                    }
+                    else {
+                        self.navigator.replace(self.componentMap[route]);
+                    }
                     self.drawer.close()
                 }} />}
                 tapToClose={true}
@@ -107,6 +114,26 @@ export default class Navigation extends React.Component<any, any> {
         }
     }
 
+    private createBackButton(eventEmitter: EventEmitter) {
+        return (
+            <TouchableOpacity
+                style={styles.navBarLeftButton}
+                onPress={() => { eventEmitter.emit('back') }}>
+                <Icon name='chevron-left' size={25} color={'white'} />
+            </TouchableOpacity>
+        )
+    }
+
+    private createHomeButton(eventEmitter: EventEmitter) {
+        return (
+            <TouchableOpacity
+                style={styles.navBarLeftButton}
+                onPress={() => { eventEmitter.emit('openMenu') }}>
+                <Icon name='menu' size={25} color={'white'} />
+            </TouchableOpacity>
+        );
+    }
+
     private createNavigationBarRouteMapper(): any {
         var self = this;
 
@@ -114,21 +141,13 @@ export default class Navigation extends React.Component<any, any> {
             LeftButton(route, navigator, index, navState) {
                 switch (route.id) {
                     case 'Home':
-                        return (
-                            <TouchableOpacity
-                                style={styles.navBarLeftButton}
-                                onPress={() => { self.eventEmitter.emit('openMenu') }}>
-                                <Icon name='menu' size={25} color={'white'} />
-                            </TouchableOpacity>
-                        )
+                        return self.createHomeButton(self.eventEmitter);
+
                     default:
-                        return (
-                            <TouchableOpacity
-                                style={styles.navBarLeftButton}
-                                onPress={() => { self.eventEmitter.emit('back') }}>
-                                <Icon name='chevron-left' size={25} color={'white'} />
-                            </TouchableOpacity>
-                        )
+                        if (self.useBackButton) {
+                            return self.createBackButton(self.eventEmitter);
+                        }
+                        return self.createHomeButton(self.eventEmitter);
                 }
             },
 

@@ -14,16 +14,18 @@ const styles = StyleSheet.create({
 
     menuContainer: {
         backgroundColor: '#FFF',
+        flex: 1,
+        flexDirection: 'row',
         top: 20
     },
     menuItem: {
-        color: '#333',
+        color: '#3F51B5',
         padding: 10,
         textAlign: 'left'
     },
 
     navBar: {
-        backgroundColor: '#BD5026',
+        backgroundColor: '#3F51B5',
     },
     navBarText: {
         color: 'white',
