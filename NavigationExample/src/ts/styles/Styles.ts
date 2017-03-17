@@ -1,5 +1,5 @@
 
-import { React, StyleSheet } from "react-native";
+import { Platform, React, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         flex: 1,
         flexDirection: 'column',
-        top: 70
+        top: (Platform.OS === 'ios') ? 70 : 0
     },
     menuContainer: {
         backgroundColor: '#FFF',
