@@ -5,7 +5,6 @@ import * as Icon from 'react-native-vector-icons/MaterialIcons';
 import EventEmitter = require('eventemitter3');
 
 import styles from './styles/Styles';
-import Menu from './views/Menu';
 import IRoute from './IRoute';
 import Router from './Router';
 
@@ -42,15 +41,7 @@ export default class Navigation extends Router {
             <Drawer
                 ref={(ref) => self.drawer = ref}
                 type="overlay"
-                content={<Menu navigate={(route) => {
-                    if (self.useBackButton) {
-                        self.navigator.push(self.routeMap[route]);
-                    }
-                    else {
-                        self.navigator.replace(self.routeMap[route]);
-                    }
-                    self.drawer.close()
-                }} />}
+                content={self.renderNavigation()}
                 tapToClose={true}
                 openDrawerOffset={0.2}
                 panCloseMask={0.2}
@@ -79,6 +70,16 @@ export default class Navigation extends Router {
                 />
             </Drawer>
         );
+    }
+
+    protected onItemSelect(item) {
+        if (this.useBackButton) {
+            this.navigator.push(this.routeMap[item]);
+        }
+        else {
+            this.navigator.replace(this.routeMap[item]);
+        }
+        this.drawer.close()
     }
 
     private createBackButton(eventEmitter: EventEmitter) {

@@ -16,11 +16,6 @@ export default class Navigation extends Router {
 
     constructor() {
         super();
-
-        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        this.state = {
-            dataSource: ds.cloneWithRows(this.menuItems)
-        };
     }
 
     componentDidMount() {
@@ -60,27 +55,20 @@ export default class Navigation extends Router {
         );
     }
 
-    private renderMenuItem(item) {
-        return (
-            <Button title={item} style={styles.menuItem} onPress={() => this.onItemSelect(item)}>{item}</Button>
-        );
-    }
+    protected onItemSelect(item) {
+        var drawer: any = this.refs[Navigation.DRAWER];
 
-    private renderNavigation() {
-        return (<View style={{ flex: 1, backgroundColor: '#fff' }}>
-            {/*<Text style={{ margin: 10, fontSize: 15, textAlign: 'left' }}>I'm in the Drawer!</Text>*/}
-            <ListView
-                style={styles.menuContainer}
-                dataSource={this.state.dataSource}
-                renderRow={(item) => this.renderMenuItem(item)}
-            />
-        </View>);
+        console.log("Selected "+item);
+        drawer.closeDrawer();
+        this.navigator.replace(this.routeMap[item]);
     }
 
     protected renderScene(route, navigator) {
         var toolBar: any = this.refs[Navigation.TOOLBAR];
 
-        //toolBar.title = route.id;
+        if (toolBar) {
+            toolBar.title = route.id;
+        }
 
         return super.renderScene(route, navigator);
     }
@@ -98,11 +86,4 @@ export default class Navigation extends Router {
         drawer.openDrawer();
     }
 
-    private onItemSelect(item) {
-        var drawer: any = this.refs[Navigation.DRAWER];
-
-        console.log("Selected "+item);
-        drawer.closeDrawer();
-        this.navigator.replace(this.routeMap[item]);
-    }
 }

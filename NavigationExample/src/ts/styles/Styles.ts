@@ -15,12 +15,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         flex: 1,
         flexDirection: 'row',
-        top: 20
+        top: (Platform.OS === 'ios') ? 20 : 0
     },
     menuItem: {
         backgroundColor: '#FFF',
         color: '#3F51B5',
-        padding: 0,
+        fontSize: 16,
+        padding: 10,
+        paddingLeft:20,
         textAlign: 'left'
     },
     navBar: {

@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { ListView, Text, TouchableOpacity, View } from 'react-native';
 
 import EventEmitter = require('eventemitter3');
+
+import styles from './styles/Styles';
 
 import Home from './views/Home';
 import IRoute from './IRoute';
@@ -20,9 +22,17 @@ export default class Navigation extends React.Component<any, any> {
         this.routeMap = this.createRouteMap();
         this.menuItems = this.createMenuItems(this.routeMap);
         this.eventEmitter = new EventEmitter();
+        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this.state = {
+            dataSource: ds.cloneWithRows(this.menuItems)
+        };
     }
 
     // protected methods used by sub classes
+
+    protected onItemSelect(item) {
+
+    }
 
     protected renderScene(route, navigator) {
 
@@ -34,8 +44,18 @@ export default class Navigation extends React.Component<any, any> {
                 return (<View1 />);
 
             case 'View2':
-                return (<View2 />); 
+                return (<View2 />);
         }
+    }
+
+    protected renderNavigation() {
+        return (
+            <ListView
+                style={styles.menuContainer}
+                dataSource={this.state.dataSource}
+                renderRow={(item) => this.renderMenuItem(item)}
+            />
+        );
     }
 
     // private methods
@@ -66,5 +86,13 @@ export default class Navigation extends React.Component<any, any> {
                 id: 'View2'
             }
         }
+    }
+
+    private renderMenuItem(item) {
+        return (
+            <TouchableOpacity onPress={() => this.onItemSelect(item)}>
+                <Text title={item} style={styles.menuItem}>{item}</Text>
+            </TouchableOpacity>
+        );
     }
 } 
