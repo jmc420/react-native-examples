@@ -5,30 +5,21 @@ import * as Icon from 'react-native-vector-icons/MaterialIcons';
 import EventEmitter = require('eventemitter3');
 
 import styles from './styles/Styles';
-import Home from './views/Home';
 import Menu from './views/Menu';
 import IRoute from './IRoute';
-import RouteMap from './RouteMap';
-import View1 from './views/View1';
-import View2 from './views/View2';
+import Router from './Router';
 
-export default class Navigation extends React.Component<any, any> {
+export default class Navigation extends Router {
 
     private drawer: Drawer;
-    private eventEmitter: EventEmitter;
     private navigator: Navigator;
     private navigationBarRouteMapper;
-    private routeMap:{[id:string]:IRoute} = {};
     private useBackButton;
 
     constructor() {
         super();
 
-        let routeMap = new RouteMap();
-
-        this.routeMap = routeMap.getRouteMap();
         this.useBackButton = false;
-        this.eventEmitter = new EventEmitter();
         this.navigationBarRouteMapper = this.createNavigationBarRouteMapper();
     }
 
@@ -88,19 +79,6 @@ export default class Navigation extends React.Component<any, any> {
                 />
             </Drawer>
         );
-    }
-
-    private renderScene(route, navigator) {
-        switch (route.id) {
-            case 'Home':
-                return (<Home/>);
-
-            case 'View1':
-                return (<View1/>);
-
-            case 'View2':
-                return (<View2/>);
-        }
     }
 
     private createBackButton(eventEmitter: EventEmitter) {

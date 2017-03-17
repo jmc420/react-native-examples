@@ -4,14 +4,13 @@ import { React, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     
     container: {
-        //justifyContent: "center",
-        //alignItems: "center",
-        backgroundColor: "#F0F8FF",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#FFF",
         flex: 1,
         flexDirection: 'column',
         top: 70
-    } as React.ViewStyle,
-
+    },
     menuContainer: {
         backgroundColor: '#FFF',
         flex: 1,
@@ -21,12 +20,11 @@ const styles = StyleSheet.create({
     menuItem: {
         backgroundColor: '#FFF',
         color: '#3F51B5',
-        padding: 10,
+        padding: 0,
         textAlign: 'left'
     },
-
     navBar: {
-        backgroundColor: '#3F51B5',
+        backgroundColor: '#3F51B5'
     },
     navBarText: {
         color: 'white',
@@ -44,10 +42,6 @@ const styles = StyleSheet.create({
     navBarRightButton: {
         paddingRight: 10,
         paddingTop: 5
-    },
-    scene: {
-        flex: 1,
-        paddingTop: 63,
     },
     toolBar: {
         backgroundColor: '#3F51B5',
