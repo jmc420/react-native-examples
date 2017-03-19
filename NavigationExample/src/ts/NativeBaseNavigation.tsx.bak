@@ -1,0 +1,64 @@
+import * as React from 'react';
+import { Content, Drawer, Text, List, Icon, Container, Left, Right, Button, View } from 'native-base';
+
+import { Navigator } from 'react-native';
+import EventEmitter = require('eventemitter3');
+
+import styles from './styles/Styles';
+import IRoute from './IRoute';
+import Router from './Router';
+
+export default class NativeBaseNavigation extends React.Component<any, any> {
+
+    private drawer: Drawer;
+    private navigator: Navigator;
+    private useBackButton;
+
+    constructor() {
+        super();
+
+        this.useBackButton = false;
+    }
+
+    componentDidMount() {
+       
+    }
+
+    render() {
+        var self = this;
+
+        return (
+            <Drawer
+                ref={(ref) => { this.drawer = ref; }}
+                content={<SideBar navigator={this.navigator} />}
+                onClose={() => this.closeDrawer()}>
+                <Navigator
+                    ref={(ref) => self.navigator = ref}
+                    configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
+                    initialRoute={{
+                        id: 'Home',
+                        title: 'Home',
+                        index: 0
+                    }}
+                    renderScene={(route, navigator) => self.renderScene(route, navigator)}
+                />
+            </Drawer>
+        );
+    }
+
+    protected onItemSelect(item) {
+        if (this.useBackButton) {
+            this.navigator.push(this.routeMap[item]);
+        }
+        else {
+            this.navigator.replace(this.routeMap[item]);
+        }
+    }
+
+    private closeDrawer() {
+        if (this.props.drawerState === 'opened') {
+            this.props.closeDrawer();
+        }
+    }
+
+}
