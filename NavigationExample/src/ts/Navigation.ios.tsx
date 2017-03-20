@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Navigator, Text, TouchableOpacity } from 'react-native';
 import Drawer from 'react-native-drawer';
-import * as Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventEmitter = require('eventemitter3');
 
 import styles from './styles/Styles';

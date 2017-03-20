@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, DrawerLayoutAndroid, ListView, Navigator, Text, View } from 'react-native';
-import * as Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/MaterialIcons';
 
 import IRoute from './IRoute';
 import Router from './Router';
@@ -32,8 +32,8 @@ export default class Navigation extends Router {
                 ref={Navigation.DRAWER}
                 renderNavigationView={() => self.renderNavigation()}>
                 <Ionicons.ToolbarAndroid
-                    actions={[{ title: 'Settings', iconName: 'md-settings', show: 'always', showWithText: false }]}
-                    navIconName="md-menu"
+                    actions={[{ title: 'Settings', iconName: 'settings', show: 'always', showWithText: false }]}
+                    navIconName="menu"
                     onActionSelected={self.onActionSelected}
                     onIconClicked={() => self.onIconClicked()}
                     ref={Navigation.TOOLBAR}
