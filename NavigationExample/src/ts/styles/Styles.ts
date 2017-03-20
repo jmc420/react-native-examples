@@ -1,5 +1,5 @@
-
-import { Platform, React, StyleSheet } from "react-native";
+import * as React from 'react';
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     
@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         top: (Platform.OS === 'ios') ? 70 : 0
-    },
+    } as React.ViewStyle,
     menuContainer: {
         backgroundColor: '#FFF',
         flex: 1,
         flexDirection: 'row',
         top: (Platform.OS === 'ios') ? 20 : 0
-    },
+    } as React.ViewStyle,
     menuItem: {
         backgroundColor: '#FFF',
         color: '#3F51B5',
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft:20,
         textAlign: 'left'
-    },
+    } as React.ViewStyle,
     navBar: {
         backgroundColor: '#3F51B5'
     },

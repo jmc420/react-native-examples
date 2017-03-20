@@ -91,7 +91,7 @@ export default class Navigation extends React.Component<any, any> {
     private renderMenuItem(item) {
         return (
             <TouchableOpacity onPress={() => this.onItemSelect(item)}>
-                <Text title={item} style={styles.menuItem}>{item}</Text>
+                <Text style={styles.menuItem}>{item}</Text>
             </TouchableOpacity>
         );
     }
