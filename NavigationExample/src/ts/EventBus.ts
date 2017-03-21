@@ -5,6 +5,9 @@ export default class EventBus {
     protected eventEmitter: EventEmitter;
     protected static instance: EventBus;
 
+    public static DRAWER_EVENT:string = "DRAWER";
+    public static MENU_EVENT:string = "MENU";
+
     constructor() {
         if (EventBus.instance != null) {
             throw new Error("EventBus already instantiated");

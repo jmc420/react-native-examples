@@ -1,10 +1,14 @@
 import * as React from 'react';
 import EventEmitter = require('eventemitter3');
-import { Button, Container, Content, Left, List, ListItem, Right, Text, Title, View } from 'native-base';
+import { Body, Button, Container, Content, Header, Left, List, ListItem, Right, Text, Title, View } from 'native-base';
 
 import EventBus from "../EventBus";
 
-export default class NativeBaseSideBar extends React.Component<any, any> {
+interface SideBarProps {
+    menuItems:string[];
+}
+
+export default class NativeBaseSideBar extends React.Component<SideBarProps, any> {
 
     private eventEmitter:EventEmitter;
 
@@ -16,18 +20,23 @@ export default class NativeBaseSideBar extends React.Component<any, any> {
     render() {
         return (
             <Container>
-                <Content style={{ flex: 1, backgroundColor: '#fff', top: -1 }}>
-                    <List>
-                        <ListItem button onPress={() => { this.select("Home") }} >
-                            <Text>Home</Text>
-                        </ListItem>
-                    </List>
+                <Header>
+                    <Body>
+                        <Title>Menu</Title>
+                    </Body>
+                </Header>
+                <Content style={{ flex: 1, backgroundColor: '#fff'}}>
+                    <List dataArray={this.props.menuItems} renderRow={menuItem =>
+                        <ListItem button onPress={() => { this.select(menuItem); }} >
+                            <Text>{menuItem}</Text>
+                        </ListItem>}
+                    />
                 </Content>
             </Container>
         );
     }
 
     private select(option:String) {
-        this.eventEmitter.emit("select", option);
+        this.eventEmitter.emit(EventBus.MENU_EVENT, option);
     }
 }

@@ -8,14 +8,16 @@ import styles from '../styles/Styles';
 import EventBus from "../EventBus";
 import Home from './Home';
 import IRoute from '../IRoute';
+import Settings from './Settings';
 import SideBar from './SideBar';
-import View1 from '../views/View1';
-import View2 from '../views/View2';
+import View1 from './View1';
+import View2 from './View2';
 
 export default class Navigation extends React.Component<any, any> {
 
-    private drawer:any;
-    private eventEmitter:EventEmitter;
+    private drawer: any;
+    private eventEmitter: EventEmitter;
+    private menuItems: string[];
     private navigator: Navigator;
     protected routeMap: { [id: string]: IRoute } = {};
     private useBackButton;
@@ -23,23 +25,25 @@ export default class Navigation extends React.Component<any, any> {
     constructor() {
         super();
 
-        let eventBus:EventBus = new EventBus();
+        let eventBus: EventBus = new EventBus();
 
         this.eventEmitter = eventBus.getEventEmitter();
         this.useBackButton = false;
-        this.routeMap = this.createRouteMap(); 
+        this.routeMap = this.createRouteMap();
+        this.menuItems = this.createMenuItems(this.routeMap);
     }
 
     componentDidMount() {
         var self = this;
 
-        this.eventEmitter.addListener('openDrawer', () => {
+        this.eventEmitter.addListener(EventBus.DRAWER_EVENT, () => {
             self.drawer._root.open();
         });
 
-        this.eventEmitter.addListener('select', (option:string) => {
+        this.eventEmitter.addListener(EventBus.MENU_EVENT, (option: string) => {
             self.drawer._root.close();
-            console.log("Option "+option);
+            console.log("Option " + option);
+            this.navigateToScreen(option);
         });
     }
 
@@ -49,8 +53,8 @@ export default class Navigation extends React.Component<any, any> {
         return (
             <Drawer
                 ref={(ref) => { this.drawer = ref; }}
-                content={<SideBar navigator={this.navigator} />}
-                onClose={() => this.closeDrawer()}>
+                content={<SideBar menuItems={this.menuItems} />}
+                onClose={() => console.log("Close drawer")}>
                 <Navigator
                     ref={(ref) => self.navigator = ref}
                     configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
@@ -65,10 +69,15 @@ export default class Navigation extends React.Component<any, any> {
         );
     }
 
-    private closeDrawer() {
-        if (this.props.drawerState === 'opened') {
-            this.props.closeDrawer();
+    private createMenuItems(routeMap: { [id: string]: IRoute }): string[] {
+        var result: string[] = [];
+
+        for (var key in routeMap) {
+            var route: IRoute = routeMap[key];
+
+            result.push(route.id);
         }
+        return result;
     }
 
     private createRouteMap(): { [id: string]: IRoute } {
@@ -84,11 +93,15 @@ export default class Navigation extends React.Component<any, any> {
             'View2': {
                 title: 'View2',
                 id: 'View2'
+            },
+            'Settings': {
+                title: 'Settings',
+                id: 'Settings'
             }
         }
     }
 
-    private onItemSelect(item) {
+    private navigateToScreen(item) {
         if (this.useBackButton) {
             this.navigator.push(this.routeMap[item]);
         }
@@ -108,6 +121,9 @@ export default class Navigation extends React.Component<any, any> {
 
             case 'View2':
                 return (<View2 />);
+
+            case 'Settings':
+                return (<Settings />);
         }
     }
 

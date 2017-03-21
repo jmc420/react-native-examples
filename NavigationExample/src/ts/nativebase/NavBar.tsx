@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Body, Button, Header, Icon, Left, Right, Text, Title, View } from 'native-base';
+import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import EventEmitter = require('eventemitter3');
-
-import styles from '../styles/Styles';
 
 import EventBus from "../EventBus";
 
-export default class NavBar extends React.Component<any, any> {
+interface NavBarProps {
+    title:string;
+}
+
+export default class NavBar extends React.Component<NavBarProps, any> {
     private eventEmitter:EventEmitter;
 
     constructor() {
@@ -23,10 +25,10 @@ export default class NavBar extends React.Component<any, any> {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Headers</Title>
+                        <Title>{this.props.title}</Title>
                     </Body>
                     <Right >
-                        <Button transparent onPress={this.props.openDrawer}>
+                        <Button transparent onPress={() => this.openSettings()}>
                             <Icon name="settings" />
                         </Button>
                     </Right>
@@ -35,6 +37,10 @@ export default class NavBar extends React.Component<any, any> {
     }
 
     private openDrawer() {
-        this.eventEmitter.emit("openDrawer");
+        this.eventEmitter.emit(EventBus.DRAWER_EVENT);
+    }
+
+    private openSettings() {
+        this.eventEmitter.emit(EventBus.MENU_EVENT, "Settings");
     }
 }

@@ -3,15 +3,15 @@ import { Container, Content, Text, View } from 'native-base';
 
 import NavBar from './NavBar';
 
-export default class Home extends React.Component<any, any> {
+export default class Settings extends React.Component<any, any> {
 
     render() {
         return (
             <Container>
-                <NavBar title="Home"/>
+                <NavBar title="Settings"/>
                 <Content padder style={{backgroundColor: '#fff'}} >
                     <View>
-                        <Text>Home Screen</Text>
+                        <Text>Settings</Text>
                     </View>
                 </Content>
             </Container>
