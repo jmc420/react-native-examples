@@ -37,6 +37,10 @@ export default class NativeBaseSideBar extends React.Component<SideBarProps, any
     }
 
     private select(option:String) {
-        this.eventEmitter.emit(EventBus.MENU_EVENT, option);
+        if (option == "Settings") {
+            this.eventEmitter.emit(EventBus.MENU_PUSH_EVENT, option);
+        } else {
+            this.eventEmitter.emit(EventBus.MENU_REPLACE_EVENT, option);
+        }
     }
 }

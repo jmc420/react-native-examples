@@ -34,16 +34,30 @@ export default class Navigation extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        var self = this;
-
         this.eventEmitter.addListener(EventBus.DRAWER_EVENT, () => {
-            self.drawer._root.open();
+            this.drawer._root.open();
         });
 
-        this.eventEmitter.addListener(EventBus.MENU_EVENT, (option: string) => {
-            self.drawer._root.close();
+        this.eventEmitter.addListener(EventBus.MENU_REPLACE_EVENT, (option: string) => {
+            this.drawer._root.close();
             console.log("Option " + option);
-            this.navigateToScreen(option);
+            this.navigateToScreen(option, false);
+        });
+
+        this.eventEmitter.addListener(EventBus.MENU_POP_EVENT, () => {
+            var routes = this.navigator.getCurrentRoutes();
+
+            if (routes.length == 0) {
+                return false;
+            }
+            console.log("Pop");
+            this.navigator.pop();
+        });
+
+        this.eventEmitter.addListener(EventBus.MENU_PUSH_EVENT, (option: string) => {
+            this.drawer._root.close();
+            console.log("Option " + option);
+            this.navigateToScreen(option, true);
         });
     }
 
@@ -101,8 +115,8 @@ export default class Navigation extends React.Component<any, any> {
         }
     }
 
-    private navigateToScreen(item) {
-        if (this.useBackButton) {
+    private navigateToScreen(item, useBackButton:boolean) {
+        if (useBackButton) {
             this.navigator.push(this.routeMap[item]);
         }
         else {
@@ -114,16 +128,16 @@ export default class Navigation extends React.Component<any, any> {
 
         switch (route.id) {
             case 'Home':
-                return (<Home />);
+                return (<Home title="Home" back={false}/>);
 
             case 'View1':
-                return (<View1 />);
+                return (<View1 title="View1" back={false}/>);
 
             case 'View2':
-                return (<View2 />);
+                return (<View2 title="View2" back={false}/>);
 
             case 'Settings':
-                return (<Settings />);
+                return (<Settings title="Settings" back={true}/>);
         }
     }
 

@@ -6,7 +6,9 @@ export default class EventBus {
     protected static instance: EventBus;
 
     public static DRAWER_EVENT:string = "DRAWER";
-    public static MENU_EVENT:string = "MENU";
+    public static MENU_POP_EVENT:string = "MENU_POP";
+    public static MENU_PUSH_EVENT:string = "MENU_PUSH";
+    public static MENU_REPLACE_EVENT:string = "MENU_REPLACE";
 
     constructor() {
         if (EventBus.instance != null) {

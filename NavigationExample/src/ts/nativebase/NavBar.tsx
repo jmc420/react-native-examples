@@ -3,12 +3,9 @@ import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import EventEmitter = require('eventemitter3');
 
 import EventBus from "../EventBus";
+import INavBarProps from "./INavBarProps";
 
-interface NavBarProps {
-    title:string;
-}
-
-export default class NavBar extends React.Component<NavBarProps, any> {
+export default class NavBar extends React.Component<INavBarProps, any> {
     private eventEmitter:EventEmitter;
 
     constructor() {
@@ -21,7 +18,7 @@ export default class NavBar extends React.Component<NavBarProps, any> {
                 <Header>
                     <Left>
                         <Button transparent onPress={() => this.openDrawer()}>
-                            <Icon name="menu" />
+                            <Icon name={(this.props.back) ? "arrow-back" : "menu"}/>
                         </Button>
                     </Left>
                     <Body>
@@ -37,10 +34,14 @@ export default class NavBar extends React.Component<NavBarProps, any> {
     }
 
     private openDrawer() {
-        this.eventEmitter.emit(EventBus.DRAWER_EVENT);
+        if (this.props.back) {
+            this.eventEmitter.emit(EventBus.MENU_POP_EVENT);
+        } else {
+            this.eventEmitter.emit(EventBus.DRAWER_EVENT);
+        }
     }
 
     private openSettings() {
-        this.eventEmitter.emit(EventBus.MENU_EVENT, "Settings");
+        this.eventEmitter.emit(EventBus.MENU_PUSH_EVENT, "Settings");
     }
 }
