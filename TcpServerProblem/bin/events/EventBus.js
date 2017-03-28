@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const EventEmitter = require("eventemitter3");
 class EventBus {
     constructor() {
@@ -37,5 +38,4 @@ class EventBus {
         return EventBus.instance;
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = EventBus;

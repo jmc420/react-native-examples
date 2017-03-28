@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const EventBus_1 = require("./events/EventBus");
 const Root_1 = require("./view/Root");
@@ -15,5 +16,4 @@ class Application extends React.Component {
         return (React.createElement(Root_1.default, null));
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Application;

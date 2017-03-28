@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const net = require("net");
 const EventBus_1 = require("./events/EventBus");
 const MessageType_1 = require("./messages/MessageType");
@@ -27,5 +28,4 @@ class ExampleTcpServer {
         });
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ExampleTcpServer;

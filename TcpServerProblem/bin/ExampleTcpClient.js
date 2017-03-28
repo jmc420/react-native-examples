@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const net = require("net");
 class ExampleTcpClient {
     constructor() {
@@ -55,6 +56,5 @@ class ExampleTcpClient {
         process.stdin.on('data', process.exit.bind(process, 0));
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ExampleTcpClient;
 new ExampleTcpClient();

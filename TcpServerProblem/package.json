@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "clean": "rm -fr ./node_modules ./bin/*",
     "compile": "./node_modules/.bin/tsc",
-    "postinstall": "rn-nodeify --install stream,process,util --hack",
+    "postinstall": "react-native link && rn-nodeify --install stream,process,util --hack && npm run compile",
     "start-client": "node ./bin/ExampleTcpClient.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
@@ -23,17 +24,18 @@
     "eventemitter3": "1.1.1",
     "process": "^0.11.9",
     "react": "15.4.1",
-    "react-native": "0.38.1",
-    "react-native-tcp": "^3.0.6",
+    "react-native": "0.42.3",
+    "react-native-tcp": "^3.2.0",
     "readable-stream": "^1.0.33",
-    "stream-browserify": "^1.0.0"
+    "stream-browserify": "^1.0.0",
+    "uuid": "^3.0.1"
   },
   "jest": {
     "preset": "jest-react-native"
   },
   "devDependencies": {
     "@types/eventemitter3": "^1.2.0",
-    "@types/node": "^6.0.50",
+    "@types/node": "^7.0.12",
     "@types/react": "^0.14.50",
     "@types/react-native": "^0.34.39",
     "babel-jest": "17.0.2",

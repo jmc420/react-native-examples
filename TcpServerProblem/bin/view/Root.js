@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const react_native_1 = require("react-native");
 const Styles_1 = require("./Styles");
@@ -48,5 +49,4 @@ class Root extends React.Component {
                 this.state.serverState)));
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Root;
