@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Alert, Text, View } from 'react-native';
+import ExampleModule from './ExampleModule';
 
 import styles from './Styles';
 
@@ -10,14 +11,7 @@ export default class ExampleBridge extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        Alert.alert(
-            'Example Bridge',
-            'Press OK to call native code',
-            [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ],
-            { cancelable: false }
-        )
+        this.showAlert();
     }
 
     render() {
@@ -32,4 +26,20 @@ export default class ExampleBridge extends React.Component<any, any> {
 
     // protected methods used by sub classes
 
+    private callExampleModule() {
+        ExampleModule.show('Press OK to call React Native', () => {
+            this.showAlert();
+        });
+    }
+
+    private showAlert() {
+        Alert.alert(
+            'Example Bridge',
+            'Press OK to call native code',
+            [
+                { text: 'OK', onPress: () => this.callExampleModule() },
+            ],
+            { cancelable: false }
+        )
+    }
 } 
