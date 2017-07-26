@@ -36,7 +36,7 @@ export default class AdmobExample extends Component {
     );
   }
   bannerError(e) {
-        console.log("Banner error");
+        console.log("Banner error "+e);
   }
 }
 
