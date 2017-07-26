@@ -29,7 +29,7 @@ export default class AdmobExample extends Component {
         </Text>
         <AdMobBanner
                     bannerSize="banner"
-                    adUnitID="ca-app-pub-5792127887771225/4953995125"
+                    adUnitID="ca-app-pub-3940256099942544/6300978111"
                     testDeviceID="EMULATOR"
                     didFailToReceiveAdWithError={this.bannerError} />
       </View>
