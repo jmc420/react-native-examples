@@ -26,11 +26,6 @@ export default class Home extends React.Component<INavBarProps, any> {
                         {table.rows.map((row, index) => (
                             <ListItem key={index}>
                                 <Text>{row.columns[0]}</Text>
-                                <Right>
-                                    <Button rounded>
-                                        <Text>View Content</Text>
-                                    </Button>
-                                </Right>
                             </ListItem>
                         ))}
                     </List>
@@ -54,7 +49,7 @@ export default class Home extends React.Component<INavBarProps, any> {
             table.rows.push(row);
 
             for (var colCount = 0; colCount < maxColumns; colCount++) {
-                row.columns.push("row " + rowCount + " column " + colCount);
+                row.columns.push("row " + rowCount);
             }
         }
         return table;

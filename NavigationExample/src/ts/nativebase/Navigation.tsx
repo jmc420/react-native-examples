@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Content, Drawer, Text, List, Icon } from 'native-base';
 
-import { Navigator } from 'react-native';
+import { Navigator} from 'react-native-deprecated-custom-components';
 import EventEmitter = require('eventemitter3');
 
 import styles from '../styles/Styles';
