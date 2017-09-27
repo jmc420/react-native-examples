@@ -3,4 +3,4 @@ export interface IRoute {
     title:string;
 }
 
-export default IRoute;
+export default IRoute; 

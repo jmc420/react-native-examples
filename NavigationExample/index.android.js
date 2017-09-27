@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navigation from './bin/nativebase/Navigation';
+import Navigation from './bin/navigation/Navigation';
 
 import {
   AppRegistry

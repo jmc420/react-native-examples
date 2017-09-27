@@ -2,7 +2,7 @@ import * as React from 'react';
 import EventEmitter = require('eventemitter3');
 import { Body, Button, Container, Content, Header, Left, List, ListItem, Right, Text, Title, View } from 'native-base';
 
-import EventBus from "../EventBus";
+import EventBus from "../event/EventBus";
 
 interface SideBarProps {
     menuItems:string[];

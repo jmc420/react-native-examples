@@ -5,13 +5,13 @@ import { Navigator} from 'react-native-deprecated-custom-components';
 import EventEmitter = require('eventemitter3');
 
 import styles from '../styles/Styles';
-import EventBus from "../EventBus";
-import Home from './Home';
-import IRoute from '../IRoute';
-import Settings from './Settings';
-import SideBar from './SideBar';
-import View1 from './View1';
-import View2 from './View2';
+import EventBus from "../event/EventBus";
+import Home from "../views//Home";
+import IRoute from "./IRoute";
+import Settings from "../views/Settings";
+import SideBar from "./SideBar";
+import View1 from "../views/View1";
+import View2 from "../views/View2";
 
 export default class Navigation extends React.Component<any, any> {
 

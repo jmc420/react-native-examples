@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import EventEmitter = require('eventemitter3');
 
-import EventBus from "../EventBus";
+import EventBus from "../event/EventBus";
 import INavBarProps from "./INavBarProps";
 
 export default class NavBar extends React.Component<INavBarProps, any> {
