@@ -8,6 +8,7 @@ import styles from "../styles/Styles";
 import EventBus from "../event/EventBus";
 import Home from "../views//Home";
 import IRoute from "./IRoute";
+import RouteMapFactory from "./RouteMapFactory";
 import Settings from "../views/Settings";
 import SideBar from "./SideBar";
 import View1 from "../views/View1";
@@ -21,27 +22,20 @@ export default class Navigation extends React.Component<any, any> {
     private drawer: any;
     private eventEmitter: EventEmitter;
     private menuItems: string[];
-    private navigationContainer: NavigationContainer;
     private navigationRouteMap:NavigationRouteConfigMap;
-    protected routeMap: { [id: string]: IRoute } = {};
+    private routeMap: { [id: string]: IRoute } = {};
     private useBackButton;
 
     constructor() {
         super();
 
         let eventBus: EventBus = new EventBus();
-        let options: StackNavigatorConfig = {
-            headerMode: 'none',
-            initialRouteName:'View1'
-        };
 
         this.eventEmitter = eventBus.getEventEmitter();
         this.useBackButton = false;
-        this.routeMap = this.createRouteMap();
         this.navigationRouteMap = this.createNavigationRouteConfig();
-        this.menuItems = this.createMenuItems(this.routeMap);
-        this.navigationContainer = StackNavigator(this.navigationRouteMap, options);
-        AppNavigator = this.navigationContainer;
+        this.menuItems = this.createMenuItems(this.navigationRouteMap);
+        this.routeMap = RouteMapFactory.createRouteMap();
     }
 
     componentDidMount() {
@@ -57,7 +51,9 @@ export default class Navigation extends React.Component<any, any> {
 
         this.eventEmitter.addListener(EventBus.MENU_POP_EVENT, () => {
             console.log("Pop");
-            NavigationActions.back();
+            let backAction = NavigationActions.back({
+            });
+            this.dispatcher.dispatch(backAction);
         }, this);
 
         this.eventEmitter.addListener(EventBus.MENU_PUSH_EVENT, (option: string) => {
@@ -75,46 +71,24 @@ export default class Navigation extends React.Component<any, any> {
                 ref={(ref) => { this.drawer = ref; }}
                 content={<SideBar menuItems={this.menuItems} />}
                 onClose={() => console.log("Close drawer")}>
-                <AppNavigator ref={nav => { this.dispatcher = nav; }/>
+                {this.renderNavigator()}
             </Drawer>
         );
     }
 
-    private createMenuItems(routeMap: { [id: string]: IRoute }): string[] {
+    private createMenuItems(routeMap:NavigationRouteConfigMap): string[] {
         var result: string[] = [];
 
         for (var key in routeMap) {
-            var route: IRoute = routeMap[key];
-
-            result.push(route.id);
+            result.push(key);
         }
         return result;
     }
 
-    private createRouteMap(): { [id: string]: IRoute } {
-        return {
-            'Home': {
-                title: 'Home',
-                id: 'Home'
-            },
-            'View1': {
-                title: 'View1',
-                id: 'View1'
-            },
-            'View2': {
-                title: 'View2',
-                id: 'View2'
-            },
-            'Settings': {
-                title: 'Settings',
-                id: 'Settings'
-            }
-        }
-    }
-
     private createNavigationRouteConfig(): NavigationRouteConfigMap {
         let config: NavigationRouteConfigMap = {
-            Home: { screen: Home },
+            Home: { screen: Home,
+            navigationOptions: {title: 'Home' }},
             View1: { screen: View1 },
             View2: { screen: View2 },
             Settings: { screen: Settings },
@@ -123,10 +97,12 @@ export default class Navigation extends React.Component<any, any> {
     }
 
     private navigateToScreen(option, useBackButton: boolean) {
+        let params = this.routeMap[option].props.navigation.state.params;
 
         if (useBackButton) {
             let navigateAction = NavigationActions.navigate({
-                routeName: option
+                routeName: option,
+                params: params
             });
             this.dispatcher.dispatch(navigateAction);
         }
@@ -134,12 +110,22 @@ export default class Navigation extends React.Component<any, any> {
             let resetAction = NavigationActions.reset({
                 index: 0,
                 actions: [
-                  NavigationActions.navigate({ routeName: option})
+                  NavigationActions.navigate({ routeName: option, params:params})
                 ]
               });
-              this.dispatcher.dispatch(resetAction);
+              this.dispatcher.dispatch(resetAction, params);
         }
+    }
 
+    private renderNavigator() {
+        let options: StackNavigatorConfig = {
+            headerMode: 'none',
+            initialRouteName:'Home',
+            initialRouteParams:this.routeMap["Home"].props.navigation.state.params
+        };
+        let navigator = StackNavigator(this.navigationRouteMap, options);
+
+        return React.createElement(navigator, { ref: nav => { this.dispatcher = nav; } });
     }
 
 }

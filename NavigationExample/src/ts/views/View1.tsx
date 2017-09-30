@@ -9,7 +9,7 @@ export default class View1 extends React.Component<INavBarProps, any> {
     render() {
         return (
             <Container>
-                <NavBar title={this.props.title} back={this.props.back}/>
+                <NavBar navigation={this.props.navigation}/>
                 <Content padder style={{backgroundColor: '#fff'}} >
                     <View>
                         <Text>View1</Text>

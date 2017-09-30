@@ -20,7 +20,7 @@ export default class Home extends React.Component<INavBarProps, any> {
 
         return (
             <Container>
-                <NavBar title={this.props.title} back={this.props.back}/>
+                <NavBar navigation={this.props.navigation}/>
                 <Content padder style={{ backgroundColor: '#fff' }} >
                     <List>
                         {table.rows.map((row, index) => (

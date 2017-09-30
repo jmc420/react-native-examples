@@ -18,11 +18,11 @@ export default class NavBar extends React.Component<INavBarProps, any> {
                 <Header>
                     <Left>
                         <Button transparent onPress={() => this.openDrawer()}>
-                            <Icon name={(this.props.back) ? "arrow-back" : "menu"}/>
+                            <Icon name={(this.props.navigation.state.params.back) ? "arrow-back" : "menu"}/>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>{this.props.title}</Title>
+                        <Title>{this.props.navigation.state.params.title}</Title>
                     </Body>
                     <Right >
                         <Button transparent onPress={() => this.openSettings()}>
@@ -34,7 +34,7 @@ export default class NavBar extends React.Component<INavBarProps, any> {
     }
 
     private openDrawer() {
-        if (this.props.back) {
+        if (this.props.navigation.state.params.back) {
             this.eventEmitter.emit(EventBus.MENU_POP_EVENT);
         } else {
             this.eventEmitter.emit(EventBus.DRAWER_EVENT);

@@ -8,6 +8,7 @@ import styles from '../styles/Styles';
 import EventBus from "../event/EventBus";
 import Home from "../views//Home";
 import IRoute from "./IRoute";
+import RouteMapFactory from "./RouteMapFactory";
 import Settings from "../views/Settings";
 import SideBar from "./SideBar";
 import View1 from "../views/View1";
@@ -19,7 +20,7 @@ export default class Navigation extends React.Component<any, any> {
     private eventEmitter: EventEmitter;
     private menuItems: string[];
     private navigator: Navigator;
-    protected routeMap: { [id: string]: IRoute } = {};
+    private routeMap: { [id: string]: IRoute } = {};
     private useBackButton;
 
     constructor() {
@@ -29,7 +30,7 @@ export default class Navigation extends React.Component<any, any> {
 
         this.eventEmitter = eventBus.getEventEmitter();
         this.useBackButton = false;
-        this.routeMap = this.createRouteMap();
+        this.routeMap = RouteMapFactory.createRouteMap();
         this.menuItems = this.createMenuItems(this.routeMap);
     }
 
@@ -72,11 +73,7 @@ export default class Navigation extends React.Component<any, any> {
                 <Navigator
                     ref={(ref) => self.navigator = ref}
                     configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
-                    initialRoute={{
-                        id: 'Home',
-                        title: 'Home',
-                        index: 0
-                    }}
+                    initialRoute={this.routeMap["Home"]}
                     renderScene={(route, navigator) => self.renderScene(route, navigator)}
                 />
             </Drawer>
@@ -94,27 +91,6 @@ export default class Navigation extends React.Component<any, any> {
         return result;
     }
 
-    private createRouteMap(): { [id: string]: IRoute } {
-        return {
-            'Home': {
-                title: 'Home',
-                id: 'Home'
-            },
-            'View1': {
-                title: 'View1',
-                id: 'View1'
-            },
-            'View2': {
-                title: 'View2',
-                id: 'View2'
-            },
-            'Settings': {
-                title: 'Settings',
-                id: 'Settings'
-            }
-        }
-    }
-
     private navigateToScreen(item, useBackButton:boolean) {
         if (useBackButton) {
             this.navigator.push(this.routeMap[item]);
@@ -128,16 +104,16 @@ export default class Navigation extends React.Component<any, any> {
 
         switch (route.id) {
             case 'Home':
-                return (<Home title="Home" back={false}/>);
+                return (<Home navigation={route.props.navigation}/>);
 
             case 'View1':
-                return (<View1 title="View1" back={false}/>);
+                return (<View1 navigation={route.props.navigation}/>);
 
             case 'View2':
-                return (<View2 title="View2" back={false}/>);
+                return (<View2 navigation={route.props.navigation}/>);
 
             case 'Settings':
-                return (<Settings title="Settings" back={true}/>);
+                return (<Settings navigation={route.props.navigation}/>);
         }
     }
 
