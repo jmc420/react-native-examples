@@ -8,7 +8,7 @@
         "noImplicitAny": false,
         "outDir": "bin",
         "sourceMap": false,
-        "target": "es5"
+        "target": "es6"
     },
     "exclude": [
         "node_modules",
