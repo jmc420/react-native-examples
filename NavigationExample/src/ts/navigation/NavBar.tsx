@@ -8,8 +8,8 @@ import INavBarProps from "./INavBarProps";
 export default class NavBar extends React.Component<INavBarProps, any> {
     private eventEmitter:EventEmitter;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.eventEmitter = EventBus.getInstance().getEventEmitter();
     }
     

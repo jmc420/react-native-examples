@@ -10,25 +10,23 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/eventemitter3": "^1.1.29",
-    "@types/react": "^16.0.7",
-    "@types/react-native": "^0.50.2",
-    "@types/react-navigation": "^1.0.20",
-    "eventemitter3": "1.1.1",
-    "native-base": "^2.2.1",
-    "react": "16.0.0",
-    "react-native": "0.50.2",
+    "eventemitter3": "^1.1.1",
+    "native-base": "^2.13.12",
+    "react": "^16.13.1",
+    "react-native": "^0.62.2",
     "react-native-deprecated-custom-components": "^0.1.1",
-    "react-native-drawer": "^2.5.0",
+    "react-native-drawer": "^2.5.1",
     "react-native-vector-icons": "4.3.0",
-    "react-navigation": "^1.0.0-beta.11"
+    "react-navigation": "^4.4.0"
   },
   "devDependencies": {
+    "@types/react": "^16.9.41",
+    "@types/react-native": "^0.62.17",
     "babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0",
-    "typescript": "^2.3.4"
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0",
+    "typescript": "^3.9.6"
   },
   "jest": {
     "preset": "react-native"

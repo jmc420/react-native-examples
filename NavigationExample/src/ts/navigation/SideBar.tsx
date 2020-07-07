@@ -12,8 +12,8 @@ export default class NativeBaseSideBar extends React.Component<SideBarProps, any
 
     private eventEmitter:EventEmitter;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.eventEmitter = EventBus.getInstance().getEventEmitter();
     }
 

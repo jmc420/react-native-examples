@@ -23,8 +23,8 @@ export default class Navigation extends React.Component<any, any> {
     private routeMap: { [id: string]: IRoute } = {};
     private useBackButton;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         let eventBus: EventBus = new EventBus();
 
